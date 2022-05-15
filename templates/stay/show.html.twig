@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stay{% endblock %}
+
+{% block body %}
+<div class="showstay-container">
+
+<p style="font-size:25px;font-family:Arial Black;color:#ffa233">More informations about the stay</p>
+</br>
+
+<br></br>
+
+    <table class="table">
+     <img style="width:10px height:10px margin:10px ;" src="{{ asset('uploads/' ~ stay.photo) }}" alt="Image" class="img-fluid"></div>
+       </br>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ stay.id }}</td>
+            </tr>
+            <tr>
+                <th>Capacity</th>
+                <td>{{ stay.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ stay.description }}</td>
+            </tr>
+            <tr>
+              
+            </tr>
+            <tr>
+                <th>Startdateav</th>
+                <td>{{ stay.startdateav ? stay.startdateav|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Enddateav</th>
+                <td>{{ stay.enddateav ? stay.enddateav|date('Y-m-d') : '' }}</td>
+            
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stay_index') }}" class="btn btn-primary"style="margin:30px;width:400px"  >back 
+     <img src="/front/images/return.png" alt="Image" class="maskImg" /></a>
+
+  </br>
+    {% if is_granted('ROLE_GUEST') %}
+        <a href="{{ path('app_booking_stay', {'stay': stay.id}) }}" class="btn btn-info" style="margin:5px;width:400px">Book now
+        <img src="/front/images/book.png" alt="Image" class="maskImg" >
+        </a>
+    {% endif %}
+ 
+   {# {{ include('stay/_delete_form.html.twig') }} #}
+    </div>
+    </div>
+{% endblock %}

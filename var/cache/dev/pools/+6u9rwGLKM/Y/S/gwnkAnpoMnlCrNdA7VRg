@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CStay%2523getNbBooked
+
+return [PHP_INT_MAX, []];

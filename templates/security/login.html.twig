@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="form-outline mb-4">
+<form   method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.id }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+<div class="login1-container">
+</br>
+    <label  for="inputUsername">Username</label>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername"  class="form-control" autocomplete="username" required autofocus>
+    </br>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+    </br>
+    <button type="submit" id="btnsignin" class="btn btn-primary btn-block mb-4">Sign in 
+     <img src="/front/images/refer.png" alt="Image"
+  class="maskImg"</img>
+    </button>
+
+
+
+   <p>Not a member? <a href="{{path('app_register')}}">Register</a></p>
+    <a href="{{ path('app_forgot_password_request') }}" class="contact-us-link"><i class="flaticon-airplane49"></i>Reset password</a>
+    </br>
+    </br>
+
+
+</div>
+
+
+    <div class="container">
+     <img src="/front/images/tuba.png" alt="Image"
+  class="maskImg"
+  />
+
+     <img src="/front/images/tuba.png" alt="Image"
+  class="maskImg"
+  />    <img src="/front/images/tuba.png" alt="Image"
+  class="maskImg"
+  />
+    </div> 
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% block body %}
+
+    <div class="my-custom-class-for-errors">
+        
+    </div>
+    {#
+    mamchetlich 
+    {% if app.user and app.user.getRoles=="ROLE_HOST" %}
+#}
+    {% if is_granted('ROLE_HOST') %}
+        <div class= "col">    
+            <a class="btn btn-success"  href="{{ path('app_stay_new') }}">Create new</a>
+        </div>
+    {% endif %}
+</br>
+</br>
+{#{% endif %}#}
+    <div class="row" style="padding-bottom: 3%">
+        <div class="col">
+        </div>
+        <div class="col">
+            <input type="text" id="stay-description" class="form-control" placeholder="a key word please" />
+        </div>
+        <div class="col" id="some-custom-id">
+            <input type="date" id="stay-date" class="form-control" >
+        </div>
+
+        <div class="col">
+            <button onclick="fetchStaysFromApi()" class="btn btn-primary w=100">Look for a stay
+                <img src="/front/images/magnifier.png" alt="Image" class="maskImg"/>
+            </button>
+        </div>
+        
+        
+        
+        <div class="col">
+        </div>
+    </div>
+{% endblock %}

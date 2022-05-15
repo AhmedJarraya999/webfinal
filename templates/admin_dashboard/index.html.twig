@@ -1,0 +1,149 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid pt-4">
+    <div class="pt-4">
+        <div class="px-3 pt-4">
+            <div class="row">
+                <div class="col">
+                    <div class="card bg-primary text-white mb-3 text-center">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-users fa-3x"></i>
+                                </div>
+                                <div class="col-8">
+                                    <h4 class="card-title">{{ stats.users }} Users</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-white bg-success mb-3 text-center">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-hotel fa-3x"></i>
+                                </div>
+                                <div class="col-8">
+                                    <h4 class="card-title">{{ stats.ads }} Stays</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-white bg-warning mb-3 text-center">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-folder fa-3x"></i>
+                                </div>
+                                <div class="col-8">
+                                    <h4 class="card-title">{{ stats.bookings }} Reservations</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-white bg-success mb-3 text-center">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-comments fa-3x"></i>
+                                </div>
+                                <div class="col-8">
+                                    <h4 class="card-title">{{ stats.comments }} Comments</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success bg-success text-white">
+                        <h2 class="alert-heading my-3">
+                            <i class="fas fa-arrow-up"></i>
+                              Best stays
+                        </h2>
+
+                        <table class="table table-hover">
+                            <thead>
+                                
+                                <tr >
+                                    <th >Host</th>
+                                    <th >Photo</th>
+                                    <th >Description</th>
+                                    <th class="text-center">N° reservations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stay in stats.stays %}
+                                <tr>
+                                    <td>
+                                        <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" width="50px" height="50px" alt="" class="avatar avatar-micro" /> 
+                                            {{stay.getUsers().firstName}} {{stay.getUsers().lastName}}
+                                    </td>
+                                    <td>
+                                        <img style="width: 60px; height:60px; border-radius: 0%" src="{{ asset('uploads/' ~ stay.photo) }}" alt=""> 
+                                    </td>
+                                    <td>{{stay.description}}</td>
+                                    <td class="text-center" style="font-size: 16px">
+                                        <span class="badge badge-dark">
+                                            {{stay.getNbBooked() }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="alert alert-danger bg-danger text-white">
+                        <h2 class="alert-heading my-3"><i class="fas fa-arrow-down"></i> Popular experiences </h2>
+
+                        <table class="table table-hover">
+                            <thead>
+                                
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                    <th>User</th>
+                                    <th>Date</th>
+                                    <th>N° comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for exp in stats.experiences %}
+                                <tr>
+                                    <td>{{ exp.title }}</td>
+                                    <td>{{ exp.content }}</td>
+                                    <td>{{ exp.user.firstName ~ ' ' ~ exp.user.lastName }}</td>
+                                    <td>{{ exp.date | date('Y-m-d') }}</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-dark">
+                                            {{ exp.nbComments }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

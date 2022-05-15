@@ -1,0 +1,77 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Stays Administration!
+{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px / 1.5 sans-serif;
+        }
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}"/> <link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.3.1/css/all.css') }}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    </style>
+
+    <div class="container-fluid"></br>
+    <h1 class="my-5">Admin Stays Management</h1>
+
+   
+</br>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id
+            </th>
+            <th class="text-center">Author</th>
+            <th class="text-center">
+                Number of Bookings</th>
+            <th class="text-center">start date av</th>
+            <th class="text-center">end date av</th>
+            <th class="text-center">Rate</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stay in stays %}
+            <tr>
+                <td>{{ stay.id }}</td>
+                <td class="text-center">
+                    <img style="margin:15px" class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
+                    {{ stay.users.getFirstname() }}</td>
+                <td class="text-center">
+                    <span class="badge badge-primary rounded">{{ stay.getNbBooked() }}</span>
+                </td>
+                <td class="text-center">{{ stay.startdateav | date }}</td>
+                <td class="text-center">{{ stay.enddateav | date }}</td>
+
+                <td class="text-center">
+                    <span class="badge badge-primary rounded">to do
+                    </td>
+
+                    <td class="text-center">
+                        <a style="margin:15px width:30px" href="{{ path('app_admin_stay_edit', {'id': stay.id}) }}" class=" btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <a href="{{ path('admin_ads_delete', {'stay': stay.id}) }}" class=" btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    const editPath = "{{ path('app_stay_edit', {'id': '__code'}) }}".replaceAll('__code', row.id);
+</script>
+{% endblock %}
